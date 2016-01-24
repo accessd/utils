@@ -404,4 +404,30 @@ describe Hanami::Utils::String do
       exception.message.must_equal exception_message
     end
   end
+
+  describe '#blank?' do
+    it 'true for empty string' do
+      Hanami::Utils::String.new('').blank?.must_equal true
+    end
+
+    it 'true for string with spaces' do
+      Hanami::Utils::String.new('  ').blank?.must_equal true
+    end
+
+    it 'true for tabs, line brakes' do
+      Hanami::Utils::String.new("\t\n\r").blank?.must_equal true
+    end
+
+    it 'true for unicode whitespace' do
+      Hanami::Utils::String.new("\u00a0").blank?.must_equal true
+    end
+
+    it 'false for string contains something' do
+      Hanami::Utils::String.new(' foo ').blank?.must_equal false
+    end
+
+    it 'true for nil' do
+      Hanami::Utils::String.new(nil).blank?.must_equal true
+    end
+  end
 end

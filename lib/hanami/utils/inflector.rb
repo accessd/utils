@@ -40,12 +40,6 @@ module Hanami
         end
       end
 
-      # Matcher for blank strings
-      #
-      # @since 0.4.1
-      # @api private
-      BLANK_STRING_MATCHER = /\A[[:space:]]*\z/.freeze
-
       # @since 0.4.1
       # @api private
       A    = 'a'.freeze
@@ -336,7 +330,7 @@ module Hanami
       # @api private
       # @since 0.4.1
       def self.pluralize(string)
-        return string if string.nil? || string.match(BLANK_STRING_MATCHER)
+        return string if String.new(string).blank?
 
         case string
         when plurals
@@ -387,7 +381,7 @@ module Hanami
       # @api private
       # @since 0.4.1
       def self.singularize(string)
-        return string if string.nil? || string.match(BLANK_STRING_MATCHER)
+        return string if String.new(string).blank?
 
         case string
         when singulars

@@ -12,6 +12,12 @@ module Hanami
       # @api private
       EMPTY_STRING        = ''.freeze
 
+      # Matcher for blank strings
+      #
+      # @since x.x.x
+      # @api private
+      BLANK_STRING_MATCHER = /\A[[:space:]]*\z/.freeze
+
       # Separator between Ruby namespaces
       #
       # @since 0.1.0
@@ -413,6 +419,15 @@ module Hanami
       # @since 0.3.0
       def respond_to_missing?(m, include_private=false)
         @string.respond_to?(m, include_private)
+      end
+
+      # A string is blank if it's empty or contains whitespaces only
+      #
+      # @return [TrueClass,FalseClass]
+      #
+      # @since x.x.x
+      def blank?
+        BLANK_STRING_MATCHER === @string
       end
     end
   end
